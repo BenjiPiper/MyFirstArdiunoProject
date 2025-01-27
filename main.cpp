@@ -12,9 +12,8 @@ const int interval1 = 1000; // var to store blink interval rate
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(servoPin, OUTPUT); 
-  pinMode(ledPin, OUTPUT);
-  myServo.attach(servoPin);
+  pinMode(ledPin, OUTPUT); //set led as output to control state
+  myServo.attach(servoPin); // attach servo object-class to servo pin to control state
 }
 
 void loop() {
