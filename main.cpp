@@ -5,15 +5,16 @@ int ledPin = 7; // var for the led pin
 int servoPin = 4; // var for Servo control signal
 int servoPosition = 0; // initiate servo position 0 degrees
 int pirPin= 8; // var for motion sensor output signal 
-
+int swPin = 5;
 unsigned int previousMillis1 = 0; // var to store milliseconds for blink
 const int interval1 = 1000; // var to store blink interval rate
 
 
 void setup() {
   // put your setup code here, to run once:
-  pinMode(ledPin, OUTPUT); //set led as output to control state
-  myServo.attach(servoPin); // attach servo object-class to servo pin to control state
+  // pinMode(servoPin, OUTPUT); 
+  pinMode(ledPin, OUTPUT);
+  myServo.attach(servoPin);
 }
 
 void loop() {
@@ -29,6 +30,12 @@ void loop() {
   else{
     servoPosition = 0;
     digitalWrite(ledPin, digitalRead(pirPin));
+  }
+
+  // switch override if swith sends voltage move servo open and turn led solid
+  if (digitalRead(swPin)==HIGH){
+    servoPosition = 90;
+    digitalWrite(ledPin, !digitalRead(ledPin));
   }
   myServo.write(servoPosition); // write servo postion
   
